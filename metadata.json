@@ -1,0 +1,6 @@
+{
+  "name": "FF Guest ID Generator",
+  "description": "Free Fire Guest ID generator with batch generation, automated free spin reward collector, custom ID naming, password presets, status classification, and ZIP export.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
