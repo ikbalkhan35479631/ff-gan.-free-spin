@@ -41,15 +41,16 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '9.3.1'
-          cache-read-only: false
+          cache-disabled: true
 
       - name: Build Debug APK
         run: |
           chmod +x ./gradlew || true
-          ./gradlew :app:assembleDebug --stacktrace --no-daemon
+          ./gradlew :app:assembleDebug --no-daemon --stacktrace
 
       - name: Locate Generated APK
         id: find_apk
+        if: always()
         run: |
           echo "Looking for generated APK..."
           find . -name "*.apk" -ls
@@ -62,7 +63,7 @@ jobs:
 
       - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
-        if: always() && steps.find_apk.outputs.apk_path != ''
+        if: steps.find_apk.outputs.apk_path != ''
         with:
           name: FF-Guest-ID-Generator-APK
           path: ${{ steps.find_apk.outputs.apk_path }}
